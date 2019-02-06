@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tasks>
-  <Task key="12.14">
-    <description>георги</description>
-    <day>12</day>
-    <hour>14</hour>
-  </Task>
   <Task key="19.3">
     <description>Normal</description>
     <day>19</day>
     <hour>3</hour>
-  </Task>
-  <Task key="19.23">
-    <description>asfs</description>
-    <day>19</day>
-    <hour>23</hour>
   </Task>
   <Task key="19.4">
     <description>Test</description>
@@ -21,12 +11,12 @@
     <hour>4</hour>
   </Task>
   <Task key="5.19">
-    <description>лени</description>
+    <description>TestRecord</description>
     <day>5</day>
     <hour>19</hour>
   </Task>
   <Task key="8.5">
-    <description>New Description</description>
+    <description>New Record</description>
     <day>8</day>
     <hour>5</hour>
   </Task>
