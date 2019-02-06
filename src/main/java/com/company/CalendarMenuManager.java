@@ -1,10 +1,10 @@
 package com.company;
 
 import java.util.*;
-
 import static java.lang.System.out;
 
 public class CalendarMenuManager extends TaskManager {
+
 Scanner scanner = new Scanner(System.in);
 
     public void printTasksForSingleDay() {

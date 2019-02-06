@@ -1,13 +1,14 @@
 package com.company;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@Embeddable
 public class Task {
 
+    @Column(name = "description")
     private String description = null;
+    @Column(name = "day")
     private int day = 0;
+    @Column(name = "hour")
     private int hour = 0;
 
     public Task() {
@@ -28,26 +29,22 @@ public class Task {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public Integer getDay() {
         return day;
     }
-
     public void setDay(Integer day) {
         this.day = day;
     }
-
     public Integer getHour() {
         return hour;
     }
-
     public void setHour(Integer hour) {
         this.hour = hour;
     }
+
 
     @Override
     public String toString() {

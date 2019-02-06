@@ -29,7 +29,6 @@ public class XMLManager  {
             }
 
             XMLOutputter print = new XMLOutputter(Format.getPrettyFormat());
-         //print.output(document, System.out);
             print.output(document, new FileOutputStream("xmlSaves.xml"));
 
         } catch (IOException e) {
@@ -59,7 +58,7 @@ public class XMLManager  {
                 hashTask.put(attribute.getValue(), t);
             }
             } catch (IOException e) {
-                System.out.println("File excepctio");
+                System.out.println("File exception");
             }
         } catch (JDOMException e) {
             System.out.println("Unloading XML error!");

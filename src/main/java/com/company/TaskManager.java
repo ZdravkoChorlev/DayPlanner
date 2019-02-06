@@ -3,17 +3,18 @@ package com.company;
 import java.util.*;
 import static java.lang.System.out;
 
-public class TaskManager {
+public class TaskManager extends Task {
 
     Scanner scanner = new Scanner(System.in);
-
-    private Map<String, Task> hashTask = new TreeMap<String, Task>();
-    private List<String> databaseKeys = new ArrayList<String>();
     private int counter = 0;
     private boolean flag = true;
 
+    private List<String> databaseKeys = new ArrayList<String>();
     public void setDatabaseKeys(List<String> databaseKeys) { this.databaseKeys = databaseKeys; }
     public List<String> getDatabaseKeys() { return this.databaseKeys; }
+
+
+    private Map<String, Task> hashTask = new TreeMap<String, Task>();
     public void setHashTask(Map<String, Task> hashTask) {
         this.hashTask = hashTask;
     }
@@ -30,6 +31,7 @@ public class TaskManager {
     public void addTask() {
 
         try {
+
             out.println("Please add description: ");
             String description = scanner.nextLine();
             out.println("Please add day: ");
@@ -57,7 +59,6 @@ public class TaskManager {
 
     public void editTask() {
         try {
-            Task task = new Task();
             if (!hashTask.isEmpty()) {
                 out.println("Please enter a day: ");
                 int day = Integer.parseInt(scanner.nextLine());
@@ -68,13 +69,18 @@ public class TaskManager {
 
                     String taskKey = day + "." + hour;
                     if (hashTask.containsKey(taskKey)) {
-                        databaseKeys.add(taskKey);
 
                         String userInput = null;
                         editTaskParameters(taskKey, userInput, day, hour);
+                        //The idea for solving the edit task problem...
+                      //  hashTask.remove(taskKey, task);
+
+                        databaseKeys.add(taskKey);
+
                         if(counter == 3 || flag == false) {
                             databaseKeys.remove(taskKey);
                         }
+
                     } else {
                         out.println("No such event");
                     }
@@ -103,6 +109,7 @@ public class TaskManager {
                         if (hashTask.containsKey(taskKey)) {
                             hashTask.remove(taskKey);
                             databaseKeys.add(taskKey);
+
                             System.out.println("Removed");
                             System.out.println();
                         } else {
@@ -161,6 +168,7 @@ public class TaskManager {
                     try {
                         int setNewHour = Integer.parseInt(scanner.nextLine());
                          hashTask.get(taskKey).setHour(setNewHour);
+
                     } catch (NumberFormatException e) {
                         System.out.println("Wrong input!");
                     }

@@ -1,12 +1,8 @@
 package com.company;
 
-import java.util.Comparator;
-import java.util.Scanner;
 import static java.lang.System.out;
 
 public class Menu extends MenuManager {
-
-    Scanner scanner = new Scanner(System.in);
 
     public Menu() {
 
@@ -18,9 +14,11 @@ public class Menu extends MenuManager {
             xml.unloadXml(getHashTask());
         } else if (getParameterChoice().equals("Database")) {
             database.unloadTasks(getHashTask());
+        } else if (getParameterChoice().equals("JPA")) {
+            jpa.unloadData(getHashTask());
         } else {
-            System.out.println("You have only two options: ");
-            System.out.println("Xml and Database!");
+            System.out.println("You have only three options: ");
+            System.out.println("Xml, Database and JPA!");
         }
 
         int choice = 0;

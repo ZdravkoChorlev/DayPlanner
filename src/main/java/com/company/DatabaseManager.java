@@ -1,5 +1,5 @@
 package com.company;
-import javax.persistence.Entity;
+
 import java.sql.*;
 import java.util.List;
 import java.util.Map;
