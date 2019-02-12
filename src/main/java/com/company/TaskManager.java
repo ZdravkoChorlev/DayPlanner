@@ -3,18 +3,18 @@ package com.company;
 import java.util.*;
 import static java.lang.System.out;
 
-public class TaskManager extends Task {
+public class TaskManager {
 
     Scanner scanner = new Scanner(System.in);
     private int counter = 0;
     private boolean flag = true;
 
     private List<String> databaseKeys = new ArrayList<String>();
+
     public void setDatabaseKeys(List<String> databaseKeys) { this.databaseKeys = databaseKeys; }
     public List<String> getDatabaseKeys() { return this.databaseKeys; }
 
-
-    private Map<String, Task> hashTask = new TreeMap<String, Task>();
+    private static Map<String, Task> hashTask = new TreeMap<String, Task>();
     public void setHashTask(Map<String, Task> hashTask) {
         this.hashTask = hashTask;
     }
@@ -31,7 +31,6 @@ public class TaskManager extends Task {
     public void addTask() {
 
         try {
-
             out.println("Please add description: ");
             String description = scanner.nextLine();
             out.println("Please add day: ");
@@ -43,8 +42,10 @@ public class TaskManager extends Task {
                 Task task = new Task(description, day, hour);
                 String taskKey = day + "." + hour;
 
-                if (!hashTask.containsKey(taskKey)) {
-                    hashTask.put(taskKey, task);
+                if (!getHashTask().containsKey(taskKey)) {
+                   // hashTask.put(taskKey, task);
+                    getHashTask().put(taskKey, task);
+                    System.out.println(getHashTask().size());
 
                 } else {
                     out.println("For this day and hour you have already added a task. ");
@@ -59,7 +60,7 @@ public class TaskManager extends Task {
 
     public void editTask() {
         try {
-            if (!hashTask.isEmpty()) {
+            if (!getHashTask().isEmpty()) {
                 out.println("Please enter a day: ");
                 int day = Integer.parseInt(scanner.nextLine());
                 out.println("Please enter an hour");
@@ -68,12 +69,12 @@ public class TaskManager extends Task {
                 if (validateDate(day, hour)) {
 
                     String taskKey = day + "." + hour;
-                    if (hashTask.containsKey(taskKey)) {
+                    if (getHashTask().containsKey(taskKey)) {
 
                         String userInput = null;
                         editTaskParameters(taskKey, userInput, day, hour);
                         //The idea for solving the edit task problem...
-                      //  hashTask.remove(taskKey, task);
+                         //hashTask.remove(taskKey, task);
 
                         databaseKeys.add(taskKey);
 
@@ -97,7 +98,7 @@ public class TaskManager extends Task {
     public void removeTask() {
 
             try {
-                if (!hashTask.isEmpty()) {
+                if (!getHashTask().isEmpty()) {
                     out.println("Please enter a day: ");
                     int day = Integer.parseInt(scanner.nextLine());
                     out.println("Please enter an hour: ");
@@ -106,8 +107,8 @@ public class TaskManager extends Task {
                     String taskKey = day + "." + hour;
 
                     if (validateDate(day, hour)) {
-                        if (hashTask.containsKey(taskKey)) {
-                            hashTask.remove(taskKey);
+                        if (getHashTask().containsKey(taskKey)) {
+                            getHashTask().remove(taskKey);
                             databaseKeys.add(taskKey);
 
                             System.out.println("Removed");
@@ -136,7 +137,7 @@ public class TaskManager extends Task {
         if ("yes".equalsIgnoreCase(userInput)) {
             System.out.println("Please input new description: ");
             String setNewDescription = scanner.nextLine();
-            hashTask.get(taskKey).setDescription(setNewDescription);
+            getHashTask().get(taskKey).setDescription(setNewDescription);
             flag = false;
         } else {
             counter++;
@@ -150,7 +151,7 @@ public class TaskManager extends Task {
                 System.out.println("Please input new day: ");
                 try {
                     int setNewDay = Integer.parseInt(scanner.nextLine());
-                    hashTask.get(taskKey).setDay(setNewDay);
+                    getHashTask().get(taskKey).setDay(setNewDay);
                 } catch (NumberFormatException e) {
                     System.out.println("Wrong input!");
                 }
@@ -167,7 +168,7 @@ public class TaskManager extends Task {
                     System.out.println("Please input new hour: ");
                     try {
                         int setNewHour = Integer.parseInt(scanner.nextLine());
-                         hashTask.get(taskKey).setHour(setNewHour);
+                         getHashTask().get(taskKey).setHour(setNewHour);
 
                     } catch (NumberFormatException e) {
                         System.out.println("Wrong input!");
@@ -187,7 +188,7 @@ public class TaskManager extends Task {
         }
 
         List<Task> tasksForTheDay = new ArrayList<Task>();
-        for (Task value : hashTask.values()) {
+        for (Task value : getHashTask().values()) {
             Task t = new Task(value);
             if (day == value.getDay()) {
                 tasksForTheDay.add(value);

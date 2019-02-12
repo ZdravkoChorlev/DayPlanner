@@ -1,8 +1,23 @@
 package com.company;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
-@Embeddable
-public class Task {
+@Entity
+@Table(name = "Tasks_Details")
+public class Task implements Serializable {
+
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    @Id
+    private int key = 0;
 
     @Column(name = "description")
     private String description = null;
@@ -10,6 +25,20 @@ public class Task {
     private int day = 0;
     @Column(name = "hour")
     private int hour = 0;
+
+    @ElementCollection
+    @MapKeyColumn(name = "key_key")
+    @JoinTable(name = "example_attributes", joinColumns =
+    @JoinColumn(name="example_id"))
+    private Map<String, Task> hashTask = new HashMap<String, Task>();
+
+    public Map<String, Task> getHashTask() {
+        return hashTask;
+    }
+
+    public void setHashTask(Map<String, Task> hashTask) {
+        this.hashTask = hashTask;
+    }
 
     public Task() {
 
