@@ -1,43 +1,39 @@
 package com.company;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 @Entity
-@Table(name = "Tasks_Details")
 public class Task implements Serializable {
 
-    public int getKey() {
-        return key;
-    }
-
-    public void setKey(int key) {
-        this.key = key;
-    }
-
     @Id
-    private int key = 0;
+    @GenericGenerator(name="increment" , strategy="increment")
+    @GeneratedValue(generator="increment")
+    private int id;
 
     @Column(name = "description")
-    private String description = null;
+    private String description;
     @Column(name = "day")
-    private int day = 0;
+    private int day;
     @Column(name = "hour")
-    private int hour = 0;
+    private int hour;
 
     @ElementCollection
-    @MapKeyColumn(name = "key_key")
-    @JoinTable(name = "example_attributes", joinColumns =
-    @JoinColumn(name="example_id"))
-    private Map<String, Task> hashTask = new HashMap<String, Task>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private Map<String, Task> taskMap;
 
-    public Map<String, Task> getHashTask() {
-        return hashTask;
+    public Map<String, Task> getTaskMap() {
+        return taskMap;
     }
 
-    public void setHashTask(Map<String, Task> hashTask) {
-        this.hashTask = hashTask;
+    public void setTaskMap(Map<String, Task> hashTask) {
+        this.taskMap = hashTask;
     }
 
     public Task() {

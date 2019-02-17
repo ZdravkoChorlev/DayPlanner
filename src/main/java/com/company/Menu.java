@@ -10,7 +10,7 @@ public class Menu {
 
     Scanner scanner = new Scanner(System.in);
     CalendarMenu calendarMenu = new CalendarMenu();
-    TaskManager manager = new TaskManager();
+    TaskManager taskManager = new TaskManager();
 
     public Menu() {
 
@@ -18,7 +18,7 @@ public class Menu {
 
     public void menuOptions(Map<String, Task> hashTask) {
 
-        if (getParameterChoice().equals("Xml")) {
+        if (getParameterChoice().equals("XML")) {
             xml.unloadXml(hashTask);
         } else if (getParameterChoice().equals("Database")) {
             database.unloadTasks(hashTask);
@@ -26,7 +26,7 @@ public class Menu {
             jpa.unloadData(hashTask);
         } else {
             System.out.println("You have only three options: ");
-            System.out.println("Xml, Database and JPA!");
+            System.out.println("XML, Database and JPA!");
         }
 
         int choice = 0;
@@ -42,26 +42,26 @@ public class Menu {
                 choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
-                       manager.addTask();
+                        taskManager.addTask();
                         break;
                     case 2:
-                        manager.editTask();
+                        taskManager.editTask();
                         break;
                     case 3:
-                       manager.removeTask();
+                        taskManager.removeTask();
                         break;
                     case 4:
                         if (hashTask.isEmpty()) {
                             System.out.println("You don't have tasks!");
                         } else {
-                           calendarMenu.calendarMenuOptions();
+                            calendarMenu.calendarMenuOptions();
                         }
                         break;
                     case 5:
-                       printTasks(manager.getHashTask());
+                        printTasks(taskManager.getHashTask());
                         break;
                     case 6:
-                        exit(manager.getHashTask(), manager.getDatabaseKeys());
+                        exit(taskManager.getHashTask(), taskManager.getDatabaseKeys());
                         break;
                     default:
                         out.println("Wrong input!");
@@ -74,7 +74,6 @@ public class Menu {
     }
 
     private String parameterChoice = null;
-    Task task = new Task();
     JPAManager jpa = new JPAManager();
     XMLManager xml = new XMLManager();
     DatabaseManager database = new DatabaseManager();
@@ -90,17 +89,15 @@ public class Menu {
 
     public void exit(Map<String, Task> hashTask, List<String> databaseKeys) {
 
-        if (getParameterChoice().equals("Xml")) {
+        if (getParameterChoice().equals("XML")) {
             xml.saveXml(hashTask);
         } else if (getParameterChoice().equals("Database")) {
             database.saveTasks(hashTask, databaseKeys);
         } else if (getParameterChoice().equals("JPA")) {
-            jpa.saveData(task.getHashTask());
-        }
-
-        else {
+            jpa.saveData(taskManager.getHashTask());
+        } else {
             System.out.println("You have only three options: ");
-            System.out.println("Xml, Database and JPA!");
+            System.out.println("XML, Database and JPA!");
         }
         return;
     }

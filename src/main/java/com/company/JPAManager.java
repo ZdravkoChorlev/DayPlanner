@@ -1,40 +1,45 @@
 package com.company;
 
-import org.hibernate.Session;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.SessionFactory;
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.util.List;
 import java.util.Map;
 
 
 public class JPAManager {
 
-    Task t = new Task();
+
     public void saveData(Map<String, Task> hashTask) {
 
-         Configuration configuration = new Configuration().configure();
-         SessionFactory sessionFactory = configuration.buildSessionFactory();
-         Session session = sessionFactory.openSession();
-         session.beginTransaction();
+        EntityManagerFactory factory =
+                Persistence.createEntityManagerFactory("JPADemo");
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
 
-         Task f = new Task("asfs",3, 4);
-         t.setHashTask(hashTask);
-         t.getHashTask();
-         session.save(t.getHashTask());
+         Task t = new Task();
+         t.setTaskMap(hashTask);
+         manager.persist(t);
 
-         session.getTransaction().commit();
-         session.close();
+
+         manager.getTransaction().commit();
+         manager.close();
     }
 
     public void unloadData(Map<String, Task> hashTask) {
-       /*Configuration configuration = new Configuration().configure();
-       SessionFactory sessionFactory = configuration.buildSessionFactory();
-       Session session = sessionFactory.openSession();
-       session.beginTransaction();
+       EntityManagerFactory factory =
+               Persistence.createEntityManagerFactory("JPADemo");
+       EntityManager manager = factory.createEntityManager();
+       manager.getTransaction().begin();
 
-
+        Query query = manager.createNativeQuery("SELECT * FROM Task WHERE hour > 0");
+        List<Task> list = query.getResultList();
+        for (Task task : list) {
+            hashTask.put(task.getDay() + "." + task.getHour(), task);
+        }
+        manager.getTransaction().commit();
+        manager.close();
         System.out.println("Database contents delivered...");
-        session.close();*/
     }
 }

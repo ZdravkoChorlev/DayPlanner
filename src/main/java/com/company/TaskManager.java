@@ -45,7 +45,6 @@ public class TaskManager {
                 if (!getHashTask().containsKey(taskKey)) {
                    // hashTask.put(taskKey, task);
                     getHashTask().put(taskKey, task);
-                    System.out.println(getHashTask().size());
 
                 } else {
                     out.println("For this day and hour you have already added a task. ");
