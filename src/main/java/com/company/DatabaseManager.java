@@ -40,7 +40,7 @@ public class DatabaseManager {
                 } catch(SQLException e) {
                     System.out.println("Error in inserting tasks!");
                 }
-        }
+            }
 
             for (String databaseKey : databaseKeys) {
                 try {

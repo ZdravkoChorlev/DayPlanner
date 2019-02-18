@@ -19,7 +19,7 @@ public class TaskManager {
         this.hashTask = hashTask;
     }
     public Map<String, Task> getHashTask() {
-       return this.hashTask;
+        return this.hashTask;
     }
 
 
@@ -43,7 +43,7 @@ public class TaskManager {
                 String taskKey = day + "." + hour;
 
                 if (!getHashTask().containsKey(taskKey)) {
-                   // hashTask.put(taskKey, task);
+                    // hashTask.put(taskKey, task);
                     getHashTask().put(taskKey, task);
 
                 } else {
@@ -73,7 +73,7 @@ public class TaskManager {
                         String userInput = null;
                         editTaskParameters(taskKey, userInput, day, hour);
                         //The idea for solving the edit task problem...
-                         //hashTask.remove(taskKey, task);
+                        //hashTask.remove(taskKey, task);
 
                         databaseKeys.add(taskKey);
 
@@ -96,33 +96,33 @@ public class TaskManager {
 
     public void removeTask() {
 
-            try {
-                if (!getHashTask().isEmpty()) {
-                    out.println("Please enter a day: ");
-                    int day = Integer.parseInt(scanner.nextLine());
-                    out.println("Please enter an hour: ");
-                    int hour = Integer.parseInt(scanner.nextLine());
+        try {
+            if (!getHashTask().isEmpty()) {
+                out.println("Please enter a day: ");
+                int day = Integer.parseInt(scanner.nextLine());
+                out.println("Please enter an hour: ");
+                int hour = Integer.parseInt(scanner.nextLine());
 
-                    String taskKey = day + "." + hour;
+                String taskKey = day + "." + hour;
 
-                    if (validateDate(day, hour)) {
-                        if (getHashTask().containsKey(taskKey)) {
-                            getHashTask().remove(taskKey);
-                            databaseKeys.add(taskKey);
+                if (validateDate(day, hour)) {
+                    if (getHashTask().containsKey(taskKey)) {
+                        getHashTask().remove(taskKey);
+                        databaseKeys.add(taskKey);
 
-                            System.out.println("Removed");
-                            System.out.println();
-                        } else {
-                            out.println("No such event");
-                        }
+                        System.out.println("Removed");
+                        System.out.println();
+                    } else {
+                        out.println("No such event");
                     }
-
-                } else {
-                    out.println("No tasks");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Wrong input!");
+
+            } else {
+                out.println("No tasks");
             }
+        } catch (NumberFormatException e) {
+            System.out.println("Wrong input!");
+        }
     }
 
     public void editTaskParameters(String taskKey, String userInput, int day, int hour) {
@@ -167,7 +167,7 @@ public class TaskManager {
                     System.out.println("Please input new hour: ");
                     try {
                         int setNewHour = Integer.parseInt(scanner.nextLine());
-                         getHashTask().get(taskKey).setHour(setNewHour);
+                        getHashTask().get(taskKey).setHour(setNewHour);
 
                     } catch (NumberFormatException e) {
                         System.out.println("Wrong input!");

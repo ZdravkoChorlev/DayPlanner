@@ -44,19 +44,19 @@ public class XMLManager  {
                 Document document = builder.build(file);
                 Element element = document.getRootElement();
 
-            List<Element> listOfTasks = element.getChildren();
+                List<Element> listOfTasks = element.getChildren();
 
-            for (int i = 0; i < listOfTasks.size(); i++) {
+                for (int i = 0; i < listOfTasks.size(); i++) {
 
-                Element tasks = listOfTasks.get(i);
+                    Element tasks = listOfTasks.get(i);
 
-                Attribute attribute = tasks.getAttribute("key");
-                String description = tasks.getChild("description").getText();
-                int day = Integer.parseInt(tasks.getChild("day").getText());
-                int hour = Integer.parseInt(tasks.getChild("hour").getText());
-                Task t = new Task(description, day, hour);
-                hashTask.put(attribute.getValue(), t);
-            }
+                    Attribute attribute = tasks.getAttribute("key");
+                    String description = tasks.getChild("description").getText();
+                    int day = Integer.parseInt(tasks.getChild("day").getText());
+                    int hour = Integer.parseInt(tasks.getChild("hour").getText());
+                    Task t = new Task(description, day, hour);
+                    hashTask.put(attribute.getValue(), t);
+                }
             } catch (IOException e) {
                 System.out.println("File exception");
             }

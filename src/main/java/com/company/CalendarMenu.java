@@ -49,7 +49,7 @@ public class CalendarMenu {
         try {
             System.out.printf("Please choose a day:%n");
             Integer day = Integer.parseInt(scanner.nextLine());
-           taskManager.tasksForDay(day);
+            taskManager.tasksForDay(day);
         } catch (NumberFormatException e) {
             System.out.println("Wrong input!");
         }

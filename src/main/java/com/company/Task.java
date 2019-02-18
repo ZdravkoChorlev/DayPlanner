@@ -1,31 +1,29 @@
 package com.company;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
+
 
 @Entity
+//@SQLUpdate(sql= "Insert ignore into Task (day, description, hour) value (?, ?, ?)")
 public class Task implements Serializable {
 
     @Id
     @GenericGenerator(name="increment" , strategy="increment")
-    @GeneratedValue(generator="increment")
+    @GeneratedValue(generator="increment", strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "description")
+    @Column(name = "description", unique = true)
     private String description;
-    @Column(name = "day")
+    @Column(name = "day", unique = true)
     private int day;
-    @Column(name = "hour")
+    @Column(name = "hour", unique = true)
     private int hour;
 
     @ElementCollection
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Map<String, Task> taskMap;
 
     public Map<String, Task> getTaskMap() {
