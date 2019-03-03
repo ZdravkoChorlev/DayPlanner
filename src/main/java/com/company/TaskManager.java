@@ -39,12 +39,15 @@ public class TaskManager {
             int hour = Integer.parseInt(scanner.nextLine());
 
             if (validateDate(day, hour)) {
-                Task task = new Task(description, day, hour);
+                Task task = new Task();
+                task.setDay(day);
+                task.setHour(hour);
+                task.setDescription(description);
+
                 String taskKey = day + "." + hour;
 
                 if (!getHashTask().containsKey(taskKey)) {
-                    // hashTask.put(taskKey, task);
-                    getHashTask().put(taskKey, task);
+                    hashTask.put(taskKey, task);
 
                 } else {
                     out.println("For this day and hour you have already added a task. ");

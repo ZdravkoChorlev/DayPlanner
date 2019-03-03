@@ -2,28 +2,27 @@ package com.company;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Map;
 
-
 @Entity
-//@SQLUpdate(sql= "Insert ignore into Task (day, description, hour) value (?, ?, ?)")
-public class Task implements Serializable {
+@Table(name = "Task_Details", uniqueConstraints = {@UniqueConstraint(columnNames = {"description", "day", "hour"})})
+public class Task {
 
     @Id
-    @GenericGenerator(name="increment" , strategy="increment")
-    @GeneratedValue(generator="increment", strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name="increment" , strategy = "increment")
+    @GeneratedValue(generator="increment", strategy = GenerationType.AUTO)
+    @Column(name = "id", updatable = true)
     private int id;
 
-    @Column(name = "description", unique = true)
+    @Column(name = "description")
     private String description;
-    @Column(name = "day", unique = true)
+    @Column(name = "day")
     private int day;
-    @Column(name = "hour", unique = true)
+    @Column(name = "hour")
     private int hour;
 
     @ElementCollection
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToMany(cascade = {javax.persistence.CascadeType.ALL}, fetch = FetchType.LAZY)
     private Map<String, Task> taskMap;
 
     public Map<String, Task> getTaskMap() {
@@ -67,7 +66,6 @@ public class Task implements Serializable {
     public void setHour(Integer hour) {
         this.hour = hour;
     }
-
 
     @Override
     public String toString() {
