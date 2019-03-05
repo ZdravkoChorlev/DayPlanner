@@ -22,7 +22,7 @@ public class Task {
     private int hour;
 
     @ElementCollection
-    @OneToMany(cascade = {javax.persistence.CascadeType.ALL}, fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     private Map<String, Task> taskMap;
 
     public Map<String, Task> getTaskMap() {
