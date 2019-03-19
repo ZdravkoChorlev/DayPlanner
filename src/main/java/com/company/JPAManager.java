@@ -24,10 +24,10 @@ public class JPAManager {
             Task task = new Task();
             task.setTaskMap(hashTask);
 
-                manager.getTransaction().begin();
-                manager.persist(task);
-                manager.getTransaction().commit();
-                manager.close();
+            manager.getTransaction().begin();
+            manager.persist(task);
+            manager.getTransaction().commit();
+            manager.close();
 
         } catch (HibernateException e) {
             System.out.println("Saving exception!");
@@ -40,7 +40,7 @@ public class JPAManager {
 
         try {
 
-           Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             Statement statement = null;
             ResultSet resultSet = null;
             Task t;

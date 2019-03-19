@@ -6,7 +6,7 @@ import static java.lang.System.out;
 public class CalendarMenu {
 
     Scanner scanner = new Scanner(System.in);
-    TaskManager taskManager = new TaskManager();
+    TaskController taskController = new TaskController();
 
     public void calendarMenuOptions() {
 
@@ -28,7 +28,7 @@ public class CalendarMenu {
                         printTasksForGivenWeek();
                         break;
                     case 3:
-                        printTaskForTheMonth(taskManager.getHashTask());
+                        printTaskForTheMonth(taskController.getHashTask());
                         break;
                     case 4:
                         printTasksForGivenPeriod();
@@ -49,7 +49,7 @@ public class CalendarMenu {
         try {
             System.out.printf("Please choose a day:%n");
             Integer day = Integer.parseInt(scanner.nextLine());
-            taskManager.tasksForDay(day);
+            taskController.tasksForDay(day);
         } catch (NumberFormatException e) {
             System.out.println("Wrong input!");
         }
@@ -68,11 +68,11 @@ public class CalendarMenu {
             int end = week * 7;
             if (begin == 22 && end == 28) {
                 for (int i = begin; i <= end + 3; i++) {
-                    taskManager.tasksForDay(i);
+                    taskController.tasksForDay(i);
                 }
             } else {
                 for (int i = begin; i <= end; i++) {
-                    taskManager.tasksForDay(i);
+                    taskController.tasksForDay(i);
                 }
             }
 
@@ -128,7 +128,7 @@ public class CalendarMenu {
                 int beginDay = firstDay;
                 int endDay = secondDay;
                 for (int i = beginDay; i <= endDay; i++) {
-                    taskManager.tasksForDay(i);
+                    taskController.tasksForDay(i);
                 }
                 System.out.println();
 

@@ -21,7 +21,7 @@ public class DatabaseManager {
     public void saveTasks(Map<String, Task> hashTask, List<String> databaseKeys) {
         try {
 
-                String[] input = Scanner.class.toString().split(" ");
+            String[] input = Scanner.class.toString().split(" ");
 
             connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             statement = connection.createStatement();

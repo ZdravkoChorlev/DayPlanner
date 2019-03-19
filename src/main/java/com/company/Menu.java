@@ -10,7 +10,7 @@ public class Menu {
 
     Scanner scanner = new Scanner(System.in);
     CalendarMenu calendarMenu = new CalendarMenu();
-    TaskManager taskManager = new TaskManager();
+    TaskController taskController = new TaskController();
 
     public Menu() {
 
@@ -42,13 +42,13 @@ public class Menu {
                 choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
-                        taskManager.addTask();
+                        taskController.addTask();
                         break;
                     case 2:
-                        taskManager.editTask();
+                        taskController.editTask();
                         break;
                     case 3:
-                        taskManager.removeTask();
+                        taskController.removeTask();
                         break;
                     case 4:
                         if (hashTask.isEmpty()) {
@@ -58,10 +58,10 @@ public class Menu {
                         }
                         break;
                     case 5:
-                        printTasks(taskManager.getHashTask());
+                        printTasks(taskController.getHashTask());
                         break;
                     case 6:
-                        exit(taskManager.getHashTask(), taskManager.getDatabaseKeys());
+                        exit(taskController.getHashTask(), taskController.getDatabaseKeys());
                         break;
                     default:
                         out.println("Wrong input!");
@@ -94,7 +94,7 @@ public class Menu {
         } else if (getParameterChoice().equals("Database")) {
             database.saveTasks(hashTask, databaseKeys);
         } else if (getParameterChoice().equals("JPA")) {
-            jpa.saveData(taskManager.getHashTask());
+            jpa.saveData(taskController.getHashTask());
         } else {
             System.out.println("You have only three options: ");
             System.out.println("XML, Database and JPA!");
